@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="index.css">
+  </head>
+
+<body>
+
+<div class="container">
+  <main>
+    <div class="welcome-page">
+      <h1>Welcome to the puppies quiz!</h1>
+      <p>Click Start to begin</p>
+      <button type="button" name="start" id="start">Start</button>
+    </div>
+
+    <div class="test-questions hidden">
+
+      <p class="question">What type of puppy is this?</p>
+      <div class="picture"></div>
+      <input type="checkbox" name="choice" class="choice" value="0">
+      <span id="pup1">Venetian Schnauzer</span>
+      <input type="checkbox" name="choice" class="choice" value="1">
+      <span id="pup2">Miniature Mastiff</span>
+      <input type="checkbox" name="choice" class="choice" value="2">
+      <span id="pup3">Waxbeard</span>
+      <input type="checkbox" name="choice" class="choice" value="3">
+      <span id="pup4">Goldendoodle</span>
+      <button type="submit" name="submit" id="submit-answer">Submit</button>
+
+
+    </div>
+
+    <div class="counter">
+      <h4>Current Question:<span id="current-question">0</span> out of 5</h4>
+      <h4>Current Score:<span class="current-score">0</span> out of 5</h4>
+    </div>
+
+    <div class="feedback-page hidden">
+      <p class="feedback"></p>
+      <button class="next"></button>
+    </div>
+
+    <div class="results-page hidden">
+      <h3>Results</h3>
+      <p class="results"></p>
+    </div>
+
+  </main>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
+</script>
+
+<script type="text/javascript" src="app.js"></script>
+</body>
+</html>

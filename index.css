@@ -1,0 +1,49 @@
+*{
+  box-sizing: border-box;
+}
+
+
+.container{
+  position: relative;
+  top: 20px;
+  border: 3px solid black;
+  height: 270px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: red;
+}
+.welcome-page{
+  text-align: center;
+  font-size: 20px;
+}
+header h1{
+  text-align: center;
+  margin-top: 10px;
+}
+
+.start-quiz{
+  height: 20px;
+  width: 40px;
+}
+.welcome-page > button{
+  width: 125px;
+  height: 35px;
+  font-size: 20px;
+}
+
+.test-questions{
+  text-align: center;
+}
+
+.hidden{
+  display: none;
+}
+
+.counter{
+  margin-left: 10px;
+}
+
+#current-score, #current-question{
+  margin-left: 5px;
+}
