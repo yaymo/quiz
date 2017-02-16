@@ -15,10 +15,15 @@
       <button type="button" name="start" id="start">Start</button>
     </div>
 
-    <div class="test-questions hidden">
 
-      <p class="question">What type of puppy is this?</p>
+  <div class="question-header">
+  </div>
+
+    <div class="test-questions hidden">
+            <div class="question">What type of puppy is this?</div>
       <div class="picture"></div>
+
+     <div class="question-answers">
       <input type="checkbox" name="choice" class="choice" value="0">
       <span id="pup1">Venetian Schnauzer</span>
       <input type="checkbox" name="choice" class="choice" value="1">
@@ -27,13 +32,15 @@
       <span id="pup3">Waxbeard</span>
       <input type="checkbox" name="choice" class="choice" value="3">
       <span id="pup4">Goldendoodle</span>
-      <button type="submit" name="submit" id="submit-answer">Submit</button>
-
 
     </div>
+      <button type="submit" name="submit" id="submit-answer">Submit</button>
+    </div>
+
+
 
     <div class="counter">
-      <h4>Current Question:<span id="current-question">0</span> out of 5</h4>
+      <h4>Current Question:<span class="current-question">0</span> out of 5</h4>
       <h4>Current Score:<span class="current-score">0</span> out of 5</h4>
     </div>
 

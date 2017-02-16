@@ -2,27 +2,27 @@
 var state = {
   questions: [
     {
-      text: "what type of puppy is this?",
+      /*text: "what type of puppy is this?",*/
       image: "xyz.png",
       options: ["Venetian Schnauzer", "Miniature Mastiff", "Waxbeard", "Goldendoodle"],
       correct: 4
     }, {
-      text: "what type of puppy is this?",
+      /*text: "what type of puppy is this?",*/
       image: "xyz.png",
       options: ["dachshund", "pitbull", "Husky", "Labrador"],
       correct: 2
     }, {
-      text: "what type of puppy is this?",
+      /*text: "what type of puppy is this?",*/
       image: "xyz.png",
       options: ["French Bulldog", "German Shephard", "Indian Turnberry", "Calico"],
       correct: 4
     }, {
-      text: "what type of puppy is this?",
+      // text: "what type of puppy is this?",
       image: "xyz.png",
       options: ["Beagle", "Chihuahua", "Brown Thrasher", "Snickerdoodle"],
       correct:2
     }, {
-      text: "what type of puppy is this?",
+      // text: "what type of puppy is this?",
       image: "xyz.png",
       options: ["Pommeranian", "Great Dane", "Grey hound", "Mouse"],
       correct: 3
@@ -74,6 +74,7 @@ function nextQuestion (state){
     nextStep(state, 'question');
   }
 };
+//consider renaming function
 
 function startQuiz(state, elements){
   Object.keys(elements).forEach(function(step){
@@ -95,8 +96,6 @@ function startQuiz(state, elements){
   }
 };
 
-function startPage(state, element){
-};
 
 function renderQuestions(state, element){
   questionNum(state, element.find('.current-question'));
@@ -118,7 +117,7 @@ function renderResults(state, element){
 }
 
 function questionNum(state, element){
-  var text = "Current Question" + (state.questionIndex++) + "out of" + state.questions.length;
+  var text = "Current Question" + (state.questionIndex + 1) + "out of" + state.questions.length;
   element.text(text);
 };
 
@@ -131,21 +130,21 @@ function renderNextButton(state, element){
   var text = state.questionIndex < state.questions.length-1 ? "Next":"Results";
   element.text(text);
 }
-//use jquery to access picture div and add '<img src="' + picture + '">' +
 
 function questionAnswers(state, element){
   var currentQuestion = state.questions[state.questionIndex];
   $('.picture').html('<img src="' + currentQuestion.image + '">')
   var choices = currentQuestion.options.map(function(choice, index){
     return (
-      '<li>' + '<input type="checkbox" name="choice" value="' + index + '">' + '<span>' + choice + '</span>' + '</li>'
+      '<li>' + '<input type="checkbox" class="choice" name="choice" value="' + index + ' required">' + '<span>' + choice + '</span>' + '</li>'
       );
   });
-  element.html(choices);
+  $('.question-answers').html(choices);
+  element.parent().html(choices);
 };
 
 function renderFeedbackContainer(state, element){
-  var content = state.lastAnswer ? "<h4>Correct!</h4>" : "<h4>Incorrect!</h4>";
+  var content = state.lastAnswer ? state.feedback.positive : state.feedback.negative;
   element.html(content);
 };
 
@@ -168,6 +167,7 @@ $("button[id='start']").on('click', function(event){
   startQuiz(state, elementFinders);
 });
 
+//need if statement after var selection to make sure something is picked
 $("button[id='submit-answer']").on('click', function(event){
   event.preventDefault();
   var selection = $('input[name="choice"]:checked').val();
@@ -183,6 +183,3 @@ $('.next').click(function(event){
 $(function(){
   startQuiz(state, elementFinders);
 });
-
-
-
