@@ -76,7 +76,7 @@ function nextQuestion (state){
 };
 //consider renaming function
 
-function startQuiz(state, elements){
+function getQuestion(state, elements){
   Object.keys(elements).forEach(function(step){
     elements[step].hide();
   });
@@ -106,7 +106,6 @@ function renderQuestions(state, element){
 
 
 function renderFeedback(state, element){
-  renderFeedbackContainer(state, element.find('.feedback-page'));
   renderFeedbackText(state, element.find(".feedback"));
   renderNextButton(state, element.find('.next'));
 };
@@ -143,10 +142,7 @@ function questionAnswers(state, element){
   element.parent().html(choices);
 };
 
-function renderFeedbackContainer(state, element){
-  var content = state.lastAnswer ? state.feedback.positive : state.feedback.negative;
-  element.html(content);
-};
+
 
 function renderFeedbackText(state, element){
   var message = state.lastAnswer ? state.feedback.positive : state.feedback.negative;
@@ -161,25 +157,29 @@ var elementFinders = {
   'results': $('.results-page')
 };
 
-$("button[id='start']").on('click', function(event){
+$("button[name='start'").on('click', function(event){
   event.preventDefault();
   nextStep(state, 'question');
-  startQuiz(state, elementFinders);
+  getQuestion(state, elementFinders);
+  $('#submit-answer').prop('disabled', true)
 });
 
-//need if statement after var selection to make sure something is picked
+$('.choice').change(function(event){
+  $('#submit-answer').prop('disabled', false);
+});
+
 $("button[id='submit-answer']").on('click', function(event){
   event.preventDefault();
   var selection = $('input[name="choice"]:checked').val();
   checkQuestion(state, selection);
-  startQuiz(state, elementFinders);
+  getQuestion(state, elementFinders);
 });
 
 $('.next').click(function(event){
   nextQuestion(state);
-  startQuiz(state, elementFinders);
+  getQuestion(state, elementFinders);
 });
 
 $(function(){
-  startQuiz(state, elementFinders);
+  getQuestion(state, elementFinders);
 });
