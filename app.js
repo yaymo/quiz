@@ -5,7 +5,7 @@ var state = {
       /*text: "what type of puppy is this?",*/
       image: "xyz.png",
       options: ["Venetian Schnauzer", "Miniature Mastiff", "Waxbeard", "Goldendoodle"],
-      correct: 4
+      correct: 3
     }, {
       /*text: "what type of puppy is this?",*/
       image: "xyz.png",
@@ -15,7 +15,7 @@ var state = {
       /*text: "what type of puppy is this?",*/
       image: "xyz.png",
       options: ["French Bulldog", "German Shephard", "Indian Turnberry", "Calico"],
-      correct: 4
+      correct: 1
     }, {
       // text: "what type of puppy is this?",
       image: "xyz.png",
@@ -53,6 +53,7 @@ function checkQuestion(state, answer) {
   }
   getFeedback(state);
   nextStep(state, 'feedback');
+
 };
 
 function getFeedback(state){
@@ -74,7 +75,6 @@ function nextQuestion (state){
     nextStep(state, 'question');
   }
 };
-//consider renaming function
 
 function getQuestion(state, elements){
   Object.keys(elements).forEach(function(step){
@@ -98,25 +98,36 @@ function getQuestion(state, elements){
 
 
 function renderQuestions(state, element){
-  questionNum(state, element.find('.current-question'));
+  questionNum(state, $('.current-question'));
+  renderScore(state, $('.current-score'));
   questionText(state, element.find('.question'));
   questionAnswers(state, element.find('.choice'));
+  $('.choice').change(function(event){
+    $('#submit-answer').prop('disabled', false);
+});
 };
 
 
 
 function renderFeedback(state, element){
-  renderFeedbackText(state, element.find(".feedback"));
-  renderNextButton(state, element.find('.next'));
+  renderFeedbackText(state, $('.feedback'));
+  questionNum(state, $('.current-question'));
+  renderScore(state, $('.current-score'));
+  renderNextButton(state, $('.next'));
 };
 
 
 function renderResults(state, element){
-  renderScore(state, element.find('.results'));
+  renderScore(state, $('.results'));
 }
 
+function renderScore(state, element){
+  var score = state.currentScore;
+  element.text(score);
+};
+
 function questionNum(state, element){
-  var text = "Current Question" + (state.questionIndex + 1) + "out of" + state.questions.length;
+  var text = (state.questionIndex + 1);
   element.text(text);
 };
 
@@ -135,7 +146,7 @@ function questionAnswers(state, element){
   $('.picture').html('<img src="' + currentQuestion.image + '">')
   var choices = currentQuestion.options.map(function(choice, index){
     return (
-      '<li>' + '<input type="checkbox" class="choice" name="choice" value="' + index + ' required">' + '<span>' + choice + '</span>' + '</li>'
+      '<li>' + '<input type="checkbox" class="choice" name="choice" value="' + index + ' ">' + '<span>' + choice + '</span>' + '</li>'
       );
   });
   $('.question-answers').html(choices);
@@ -147,7 +158,7 @@ function questionAnswers(state, element){
 function renderFeedbackText(state, element){
   var message = state.lastAnswer ? state.feedback.positive : state.feedback.negative;
   element.text(message)
-}
+};
 
 
 var elementFinders = {
@@ -164,9 +175,7 @@ $("button[name='start'").on('click', function(event){
   $('#submit-answer').prop('disabled', true)
 });
 
-$('.choice').change(function(event){
-  $('#submit-answer').prop('disabled', false);
-});
+
 
 $("button[id='submit-answer']").on('click', function(event){
   event.preventDefault();
