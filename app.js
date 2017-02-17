@@ -2,27 +2,22 @@
 var state = {
   questions: [
     {
-      /*text: "what type of puppy is this?",*/
       image: "xyz.png",
       options: ["Venetian Schnauzer", "Miniature Mastiff", "Waxbeard", "Goldendoodle"],
       correct: 3
     }, {
-      /*text: "what type of puppy is this?",*/
       image: "xyz.png",
       options: ["dachshund", "pitbull", "Husky", "Labrador"],
       correct: 2
     }, {
-      /*text: "what type of puppy is this?",*/
       image: "xyz.png",
       options: ["French Bulldog", "German Shephard", "Indian Turnberry", "Calico"],
       correct: 1
     }, {
-      // text: "what type of puppy is this?",
       image: "xyz.png",
       options: ["Beagle", "Chihuahua", "Brown Thrasher", "Snickerdoodle"],
       correct:2
     }, {
-      // text: "what type of puppy is this?",
       image: "xyz.png",
       options: ["Pommeranian", "Great Dane", "Grey hound", "Mouse"],
       correct: 3
@@ -43,8 +38,7 @@ function nextStep(state, step){
   state.step = step;
 };
 
-//checking submission
-//find current question, increase score and give feedback if selection = questions.correct
+//this is where my issue is currently. i can't get state.lastAnswer to return true no matter what i select.
 function checkQuestion(state, answer) {
   var currentQuestion = state.questions[state.questionIndex];
   state.lastAnswer = currentQuestion.options[currentQuestion.correct] === answer;
@@ -146,7 +140,7 @@ function questionAnswers(state, element){
   $('.picture').html('<img src="' + currentQuestion.image + '">')
   var choices = currentQuestion.options.map(function(choice, index){
     return (
-      '<li>' + '<input type="checkbox" class="choice" name="choice" value="' + index + ' ">' + '<span>' + choice + '</span>' + '</li>'
+      '<li>' + '<input type="radio" class="choice" name="choice" value="' + index + ' ">' + '<span>' + choice + '</span>' + '</li>'
       );
   });
   $('.question-answers').html(choices);
@@ -176,10 +170,11 @@ $("button[name='start'").on('click', function(event){
 });
 
 
-
+//parseInt makes selection start returning a number
 $("button[id='submit-answer']").on('click', function(event){
   event.preventDefault();
-  var selection = $('input[name="choice"]:checked').val();
+  var selection = $('input[type="radio"][name="choice"]:checked').val();
+  selection = parseInt(selection, 10);
   checkQuestion(state, selection);
   getQuestion(state, elementFinders);
 });
