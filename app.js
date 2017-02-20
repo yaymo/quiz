@@ -136,7 +136,7 @@ function renderNextButton(state, element){
 
 function questionAnswers(state, element){
   var currentQuestion = state.questions[state.questionIndex];
-  $('.picture').html('<img src="' + currentQuestion.image + '">')
+  $('.picture').html('<img class="picture" src="' + currentQuestion.image + '">')
   var choices = currentQuestion.options.map(function(choice, index){
     return (
       '<li>' + '<input type="radio" class="choice" name="choice" value="' + index + ' ">' + '<span>' + choice + '</span>' + '</li>'
