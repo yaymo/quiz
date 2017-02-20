@@ -65,7 +65,7 @@ margin-right: auto;
 margin-top: 20px;
 }
 
-.picture{
+.picture > img{
   height: 200px;
   width: 200px;
 }
