@@ -2,35 +2,35 @@
 var state = {
   questions: [
     {
-      image: "xyz.png",
+      image: "finley.jpg",
       options: ["Venetian Schnauzer", "Miniature Mastiff", "Waxbeard", "Goldendoodle"],
       correct: 3
     }, {
-      image: "xyz.png",
+      image: "husky.jpg",
       options: ["dachshund", "pitbull", "Husky", "Labrador"],
       correct: 2
     }, {
-      image: "xyz.png",
-      options: ["French Bulldog", "German Shephard", "Indian Turnberry", "Calico"],
+      image: "german.jpg",
+      options: ["French Bulldog", "German Shepherd", "Indian Turnberry", "Calico"],
       correct: 1
     }, {
-      image: "xyz.png",
-      options: ["Beagle", "Chihuahua", "Brown Thrasher", "Snickerdoodle"],
+      image: "lab.jpg",
+      options: ["Beagle", "Chihuahua", "Chocolate Lab", "Snickerdoodle"],
       correct:2
     }, {
-      image: "xyz.png",
+      image: "dane.jpg",
       options: ["Pommeranian", "Great Dane", "Grey hound", "Mouse"],
-      correct: 3
+      correct: 1
     }],
   questionIndex: 0,
   currentScore: 0,
   step: 'welcome-page',
   lastAnswer: false,
-  feedback: [
+  feedback:
   {
     positive: "Congrats!",
     negative: "Too bad!"
-  }]
+  }
 };
 
 //how to proceed with quiz
@@ -38,10 +38,9 @@ function nextStep(state, step){
   state.step = step;
 };
 
-//this is where my issue is currently. i can't get state.lastAnswer to return true no matter what i select.
 function checkQuestion(state, answer) {
   var currentQuestion = state.questions[state.questionIndex];
-  state.lastAnswer = currentQuestion.options[currentQuestion.correct] === answer;
+  state.lastAnswer = currentQuestion.options[currentQuestion.correct] === currentQuestion.options[answer];
   if (state.lastAnswer){
     state.currentScore ++;
   }
