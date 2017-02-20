@@ -2,7 +2,7 @@
 var state = {
   questions: [
     {
-      image: finley.jpg,
+      image: "doodle.png",
       options: ["Venetian Schnauzer", "Miniature Mastiff", "Waxbeard", "Goldendoodle"],
       correct: 3
     }, {
